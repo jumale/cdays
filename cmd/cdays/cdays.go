@@ -4,14 +4,13 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/jumale/cdays/internal/routing"
 )
 
 func main() {
 	log.Print("The app is starting...")
 
-	r := mux.NewRouter()
-	r.HandleFunc("/home", rootHandler())
+	r := routing.NewBLRouter()
 
 	log.Fatal(http.ListenAndServe(":8000", r))
 }
