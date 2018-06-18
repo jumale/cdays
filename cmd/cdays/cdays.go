@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	"os"
+
 	"github.com/jumale/cdays/internal/routing"
 )
 
@@ -12,11 +14,10 @@ func main() {
 
 	r := routing.NewBLRouter()
 
-	log.Fatal(http.ListenAndServe(":8000", r))
-}
-
-func rootHandler() func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello!"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("The port wasn't set")
 	}
+
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
