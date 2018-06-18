@@ -28,7 +28,7 @@ func main() {
 	if port == "" {
 		log.Fatal("The port wasn't set")
 	}
-	diagPort := os.Getenv("DIAGNOSTICS_PORT")
+	diagPort := os.Getenv("INTERNAL_PORT")
 	if port == "" {
 		log.Fatal("The port wasn't set")
 	}
