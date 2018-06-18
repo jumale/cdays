@@ -35,12 +35,15 @@ func main() {
 
 	var blServer, diagServer http.Server
 
+	srvErrs := make(chan error, 2)
+
 	go func() {
 		blServer = http.Server{
 			Addr:    ":" + port,
 			Handler: routing.NewBLRouter(),
 		}
-		log.Fatal(blServer.ListenAndServe())
+		err := blServer.ListenAndServe()
+		srvErrs <- err
 	}()
 
 	go func() {
@@ -48,7 +51,8 @@ func main() {
 			Addr:    ":" + diagPort,
 			Handler: routing.NewDiagnosticsRouter(),
 		}
-		log.Fatal(diagServer.ListenAndServe())
+		err := diagServer.ListenAndServe()
+		srvErrs <- err
 	}()
 
 	interrupt := make(chan os.Signal, 1)
@@ -56,6 +60,8 @@ func main() {
 	select {
 	case killSignal := <-interrupt:
 		log.Printf("Got %s. Stopping...", killSignal)
+	case err := <-srvErrs:
+		log.Printf("Got a server error: %s", err)
 	}
 
 	{
