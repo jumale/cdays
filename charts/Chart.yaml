@@ -1,0 +1,10 @@
+name: cdays
+description: A Helm charts for Kubernetes application
+version: 0.0.1
+home: https://k8s.community/
+sources:
+  - https://github.com/jumale/cdays
+maintainers:
+  - name: Yuri Maltsev
+    email: yurii.maltsev@xing.com
+engine: gotpl
