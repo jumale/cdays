@@ -5,7 +5,7 @@ APP?=cdays
 GOOS?=linux
 GOARCH?=amd64
 
-RELEASE?=0.0.1
+RELEASE?=0.0.2
 COMMIT?=$(shell git rev-parse --short HEAD)
 BUILD_TIME?=$(shell date -u '+%Y-%m-%d_%H:%M:%S')
 
