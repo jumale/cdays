@@ -14,6 +14,7 @@ NAMESPACE?=jumale
 CONTAINER_NAME?=${NAMESPACE}-${APP}
 CONTAINER_IMAGE?=${REGISTRY}/${CONTAINER_NAME}
 
+
 test:
 	go test -race ./...
 
